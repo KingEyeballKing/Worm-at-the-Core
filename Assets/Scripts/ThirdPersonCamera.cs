@@ -179,9 +179,7 @@ public class ThirdPersonCamera : MonoBehaviour
 	
 	#endregion
 	
-	
 	#region Unity event functions
-	
 	/// <summary>
 	/// Use this for initialization.
 	/// </summary>
@@ -189,9 +187,7 @@ public class ThirdPersonCamera : MonoBehaviour
 	{
 		cameraXform = this.transform;//.parent;
 		if (cameraXform == null)
-		{
 			Debug.LogError("Parent camera to empty GameObject.", this);
-		}
 		
 		follow = GameObject.FindWithTag("Player").GetComponent<CharacterControllerLogic>();
 		followXform = GameObject.FindWithTag("Player").transform;
@@ -237,9 +233,7 @@ public class ThirdPersonCamera : MonoBehaviour
 	void OnDrawGizmos ()
 	{	
 		if (EditorApplication.isPlaying && !EditorApplication.isPaused)
-		{			
 			DebugDraw.DrawDebugFrustum(viewFrustum);
-		}
 	}
 	
 	void LateUpdate()
@@ -261,21 +255,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
 		// Abstraction to set right Y when using mouse
 		if (mouseWheel != 0)
-		{
 			rightY = mouseWheelScaled;
-		}
 		if (qKeyDown)
-		{
 			rightX = 1;
-		}
 		if (eKeyDown)
-		{
 			rightX = -1;
-		}
 		if (lShiftKeyDown)
-		{
 			leftTrigger = 1;
-		}
 		
 		characterOffset = followXform.position + (distanceUp * followXform.up);
 		Vector3 lookAt = characterOffset;
@@ -435,7 +421,6 @@ public class ThirdPersonCamera : MonoBehaviour
 			// 	break;
 		}
 		
-
 		CompensateForWalls(characterOffset, ref targetPosition);		
 		SmoothPosition(cameraXform.position, targetPosition);	
 		transform.LookAt(lookAt);	
@@ -445,7 +430,6 @@ public class ThirdPersonCamera : MonoBehaviour
 	}
 	
 	#endregion
-	
 	
 	#region Methods
 	
@@ -486,13 +470,9 @@ public class ThirdPersonCamera : MonoBehaviour
 					if (cWHit.normal == Vector3.zero)
 					{
 						if (cCWHit.normal == Vector3.zero)
-						{
 							Debug.LogError("No available geometry normal from near clip plane LineCasts. Something must be amuck.", this);
-						}
 						else
-						{
 							normal = cCWHit.normal;
-						}
 					}	
 					else
 					{

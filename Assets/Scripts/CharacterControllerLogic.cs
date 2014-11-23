@@ -52,7 +52,6 @@ public class CharacterControllerLogic : MonoBehaviour
 	[SerializeField]
 	private float jumpDist = 1f;
 	
-	
 	// Private global only
 	private float leftX = 0f;
 	private float leftY = 0f;
@@ -66,7 +65,6 @@ public class CharacterControllerLogic : MonoBehaviour
 	private const float NORMAL_FOV = 75.0f;
 	private float capsuleHeight;	
 	
-	
 	// Hashes
     private int m_LocomotionId = 0;
 	private int m_LocomotionPivotLId = 0;
@@ -76,29 +74,13 @@ public class CharacterControllerLogic : MonoBehaviour
 	
 	#endregion
 		
-	
 	#region Properties (public)
 
-	public Animator Animator
-	{
-		get
-		{
-			return this.animator;
-		}
-	}
-
-	public float Speed
-	{
-		get
-		{
-			return this.speed;
-		}
-	}
-	
+	public Animator Animator { get { return this.animator; } }
+	public float Speed { get { return this.speed; } }
 	public float LocomotionThreshold { get { return 0.2f; } }
 	
 	#endregion
-	
 	
 	#region Unity event functions
 	
@@ -112,9 +94,7 @@ public class CharacterControllerLogic : MonoBehaviour
 		capsuleHeight = capCollider.height;
 
 		if(animator.layerCount >= 2)
-		{
 			animator.SetLayerWeight(1, 1);
-		}		
 		
 		// Hash all animation names for performance
         m_LocomotionId = Animator.StringToHash("Base Layer.Locomotion");
@@ -136,13 +116,9 @@ public class CharacterControllerLogic : MonoBehaviour
 			
 			// Press A to jump
 			if (Input.GetButton("Jump"))
-			{
 				animator.SetBool("Jump", true);
-			}
 			else
-			{
 				animator.SetBool("Jump", false);
-			}	
 			
 			// Pull values from controller/keyboard
 			leftX = Input.GetAxis("Horizontal");
@@ -258,7 +234,6 @@ public class CharacterControllerLogic : MonoBehaviour
 	public void StickToWorldspace(Transform root, Transform camera, ref float directionOut, ref float speedOut, ref float angleOut, bool isPivoting)
     {
         Vector3 rootDirection = root.forward;
-				
         Vector3 stickDirection = new Vector3(leftX, 0, leftY);
 		
 		speedOut = stickDirection.sqrMagnitude;		
@@ -272,16 +247,16 @@ public class CharacterControllerLogic : MonoBehaviour
         Vector3 moveDirection = referentialShift * stickDirection;
 		Vector3 axisSign = Vector3.Cross(moveDirection, rootDirection);
 		
-		Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), moveDirection, Color.green);
-		Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), rootDirection, Color.magenta);
-		Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), stickDirection, Color.blue);
-		Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2.5f, root.position.z), axisSign, Color.red);
+		// Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), moveDirection, Color.green);
+		// Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), rootDirection, Color.magenta);
+		// Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2f, root.position.z), stickDirection, Color.blue);
+		// Debug.DrawRay(new Vector3(root.position.x, root.position.y + 2.5f, root.position.z), axisSign, Color.red);
 		
 		float angleRootToMove = Vector3.Angle(rootDirection, moveDirection) * (axisSign.y >= 0 ? -1f : 1f);
+		
 		if (!isPivoting)
-		{
 			angleOut = angleRootToMove;
-		}
+		
 		angleRootToMove /= 180f;
 		
 		directionOut = angleRootToMove * directionSpeed;

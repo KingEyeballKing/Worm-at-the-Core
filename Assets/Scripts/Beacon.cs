@@ -48,6 +48,7 @@ public class Beacon : MonoBehaviour
 	void Update()
 	{
 		sqrDistance = (playerTransform.position - _myTransform.position).sqrMagnitude;
+		
 		// If player is in range and beacon has darkness or brightness, make it active.
 		if (Helper.InRange(sqrExtent, MinRange, MaxRange, sqrDistance) && (MyDarknessLevel != 0f))
 			ActivateBeacon();

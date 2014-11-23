@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{E606C86C-9F44-70A0-AD5D-812F7B294995}</ProjectGuid>
+	<ProjectGuid>{42A25D71-1D39-D6DD-F701-200D7B3D2619}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -139,8 +139,11 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
+ <Reference Include="Vectrosity">
+ <HintPath>/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Plugins/Vectrosity.dll</HintPath>
+ </Reference>
  <Reference Include="HOTween">
- <HintPath>/Users/turista/WRK/MY GAME/UNITY/Assets/Standard Assets/HOTween/HOTween.dll</HintPath>
+ <HintPath>/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Standard Assets/HOTween/HOTween.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
