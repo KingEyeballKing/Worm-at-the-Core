@@ -62,7 +62,7 @@ public class CharacterControllerLogic : MonoBehaviour
 	private float charAngle = 0f;
 	private const float SPRINT_SPEED = 2.0f;	
 	private const float SPRINT_FOV = 90.0f;
-	private const float NORMAL_FOV = 75.0f;
+	private const float NORMAL_FOV = 65.0f;
 	private float capsuleHeight;	
 	
 	// Hashes

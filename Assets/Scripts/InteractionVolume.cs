@@ -1,18 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InteractionVolume : MonoBehaviour {
-
-	public GameObject TargetObject;
 
 	public enum InteractionTypes {
 		ActivateTheObject,
 		UnlockTheBuilding,
 		OpenTheArea
 	}
-
-	public InteractionTypes InteractionType { get { return this.interactionType; } }
-	public InteractionTypes interactionType = InteractionTypes.ActivateTheObject;
+	public InteractionTypes InteractionType { 
+		get { return this.interactionType; } 
+	}
+	public InteractionTypes interactionType = InteractionTypes.OpenTheArea;
+	public bool isGoingDown = false;
 
 	private Collider playerCollider;
 	private bool isColliding = false;
@@ -30,12 +31,10 @@ public class InteractionVolume : MonoBehaviour {
 
 	void OnTriggerEnter(Collider playerCollider) {
 		isColliding = true;
-		Debug.Log("isColliding = " + isColliding.ToString());
 	}
 
 	void OnTriggerExit(Collider playerCollider) {
 		isColliding = false;
-		Debug.Log("isColliding = " + isColliding.ToString());
 	}
 
 	void DetectInput() {
@@ -56,17 +55,15 @@ public class InteractionVolume : MonoBehaviour {
 	}
 
 	void ActivateObject() {
-		TargetObject.SetActive(true);
 		//TODO: Subtract cost from player power.
 	}
 
 	void UnlockBuilding() {
-		TargetObject.Unlock();
 		// TODO: Subtract cost from player power.
 	}
 
 	void OpenArea() {
-		TargetObject.SetActive(false);
+		TileGenerator.Instance.GenerateTile(transform, isGoingDown);
 		// TODO: Subtract cost from player power.
 	}
 }
