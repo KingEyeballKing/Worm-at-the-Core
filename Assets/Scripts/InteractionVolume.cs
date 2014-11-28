@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class InteractionVolume : MonoBehaviour {
 
+	public static InteractionVolume Instance;
+
 	public enum InteractionTypes {
 		ActivateTheObject,
 		UnlockTheBuilding,
@@ -18,6 +20,10 @@ public class InteractionVolume : MonoBehaviour {
 	private Collider playerCollider;
 	private bool isColliding = false;
 
+	void Awake() {
+		Instance = this;
+	}
+
 	void Start() {
 		playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
 	}
@@ -27,6 +33,12 @@ public class InteractionVolume : MonoBehaviour {
 		if (isColliding) {
 			DetectInput();
 		}
+	}
+
+	void OnDrawGizmos() {
+		SphereCollider myCollider = this.GetComponent<SphereCollider>();
+		Gizmos.color = Color.magenta;
+		Gizmos.DrawWireSphere(transform.position, myCollider.radius);
 	}
 
 	void OnTriggerEnter(Collider playerCollider) {
@@ -64,6 +76,7 @@ public class InteractionVolume : MonoBehaviour {
 
 	void OpenArea() {
 		TileGenerator.Instance.GenerateTile(transform, isGoingDown);
+		this.GetComponent<InteractionVolume>().enabled = false;
 		// TODO: Subtract cost from player power.
 	}
 }

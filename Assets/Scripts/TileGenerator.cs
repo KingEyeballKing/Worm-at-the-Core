@@ -16,19 +16,16 @@ public class TileGenerator : MonoBehaviour {
 
 	public void GenerateTile(Transform originTransform, bool isGoingDown) {
 		if (TilesPool.Count > 0) {
-			// Rotates the title if it's going backwards or down.
-			Quaternion tileRotation = isGoingDown ? new Quaternion(0, 180, 0, 0) : Quaternion.identity;
 			// Picks a random tile from the pool.
 			int k = (int)UnityEngine.Random.Range(0, TilesPool.Count);
+			// TODO: If isGoingDown and tile is stairs, make stairs that go down.
 			newTile = Instantiate(TilesPool[k], 
 			                      originTransform.position, 
-			                      Quaternion.identity) as GameObject;
+			                      originTransform.rotation) as GameObject;
 			newTile.name = "Tile_0" + totalNumberOfTiles.ToString();
 			newTile.transform.parent = originTransform.parent;
 			totalNumberOfTiles++;
-			Debug.Log(totalNumberOfTiles.ToString());
-			// Disable interaction volume script that was just used.
-			originTransform.GetComponent<InteractionVolume>().enabled = false;
+			Debug.Log("Total number of tiles = " + totalNumberOfTiles.ToString());
 		} 
 	}
 }
