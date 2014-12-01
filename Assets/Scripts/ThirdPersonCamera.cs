@@ -61,12 +61,12 @@ public class ThirdPersonCamera : MonoBehaviour
 	private Transform cameraXform;
 	[SerializeField]
 	private float distanceAway;
-	[SerializeField]
-	private float distanceAwayMultipler = 1.5f;
+	// [SerializeField]
+	// private float distanceAwayMultipler = 1.5f;
 	[SerializeField]
 	private float distanceUp;
-	[SerializeField]
-	private float distanceUpMultiplier = 5f;
+	// [SerializeField]
+	// private float distanceUpMultiplier = 5f;
 	[SerializeField]
 	private CharacterControllerLogic follow;
 	[SerializeField]
@@ -85,10 +85,10 @@ public class ThirdPersonCamera : MonoBehaviour
 	// private float firstPersonThreshold = 0.5f;
 	[SerializeField]
 	private float freeThreshold = -0.1f;
-	[SerializeField]
-	private Vector2 camMinDistFromChar = new Vector2(1f, -0.5f);
-	[SerializeField]
-	private float rightStickThreshold = 0.1f;
+	// [SerializeField]
+	// private Vector2 camMinDistFromChar = new Vector2(1f, -0.5f);
+	// [SerializeField]
+	// private float rightStickThreshold = 0.1f;
 	[SerializeField]
 	private const float freeRotationDegreePerSecond = -5f;
 	[SerializeField]
@@ -113,15 +113,15 @@ public class ThirdPersonCamera : MonoBehaviour
 	private Vector3 curLookDir;
 //	private BarsEffect barEffect;
 	private CamStates camState = CamStates.Behind;	
-	private float xAxisRot = 0.0f;
+	// private float xAxisRot = 0.0f;
 	private CameraPosition firstPersonCamPos;			
-	private float lookWeight;
+	// private float lookWeight;
 	private const float TARGETING_THRESHOLD = 0.01f;
 	private Vector3 savedRigToGoal;
 	private float distanceAwayFree;
 	private float distanceUpFree;	
 	private Vector2 rightStickPrevFrame = Vector2.zero;
-	private float lastStickMin = float.PositiveInfinity;	// Used to prevent from zooming in when holding back on the right stick/scrollwheel
+//	private float lastStickMin = float.PositiveInfinity;	// Used to prevent from zooming in when holding back on the right stick/scrollwheel
 	private Vector3 nearClipDimensions = Vector3.zero; // width, height, radius
 	private Vector3[] viewFrustum;
 	private Vector3 characterOffset;
@@ -304,7 +304,7 @@ public class ThirdPersonCamera : MonoBehaviour
 		}
 		
 		// Set the Look At Weight - amount to use look at IK vs using the head's animation
-		follow.Animator.SetLookAtWeight(lookWeight);
+		// follow.Animator.SetLookAtWeight(lookWeight);
 		
 		// Execute camera state
 		switch (camState)

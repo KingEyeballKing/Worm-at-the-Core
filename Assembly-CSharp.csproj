@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\TP_Camera.cs" />
      <Compile Include="Assets\Scripts\TP_Controller.cs" />
      <Compile Include="Assets\Scripts\TP_Motor.cs" />
+     <Compile Include="Assets\Scripts\ThePlayer.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonCameraEditor.cs" />
      <Compile Include="Assets\Scripts\TileGenerator.cs" />

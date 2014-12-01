@@ -4,10 +4,40 @@ ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: polySurface12
+    100004: polySurface2
+    100006: polySurface3
+    100008: polySurface3 1
+    100010: polySurface4
+    100012: polySurface5
+    100014: polySurface6
+    100016: polySurface8
+    100018: polySurface9
+    100020: transform1
+    100022: transform2
+    100024: transform3
+    100026: transform4
     400000: //RootNode
+    400002: polySurface12
+    400004: polySurface2
+    400006: polySurface3
+    400008: polySurface3 1
+    400010: polySurface4
+    400012: polySurface5
+    400014: polySurface6
+    400016: polySurface8
+    400018: polySurface9
+    400020: transform1
+    400022: transform2
+    400024: transform3
+    400026: transform4
     2300000: //RootNode
+    2300002: polySurface3
     3300000: //RootNode
+    3300002: polySurface3
     4300000: Cube1
+    4300002: polySurface3
+    6400000: polySurface3
     9500000: //RootNode
   materials:
     importMaterials: 0
@@ -30,7 +60,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0

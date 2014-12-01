@@ -17,15 +17,12 @@ public class InteractionVolume : MonoBehaviour {
 	public InteractionTypes interactionType = InteractionTypes.OpenTheArea;
 	public bool isGoingDown = false;
 
-	private Collider playerCollider;
+	private Collider _collider;
 	private bool isColliding = false;
 
 	void Awake() {
 		Instance = this;
-	}
-
-	void Start() {
-		playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
+		_collider = GameObject.FindWithTag("Player").GetComponent<Collider>();
 	}
 	
 	void Update() {
@@ -41,11 +38,11 @@ public class InteractionVolume : MonoBehaviour {
 		Gizmos.DrawWireSphere(transform.position, myCollider.radius);
 	}
 
-	void OnTriggerEnter(Collider playerCollider) {
+	void OnTriggerEnter(Collider _collider) {
 		isColliding = true;
 	}
 
-	void OnTriggerExit(Collider playerCollider) {
+	void OnTriggerExit(Collider _collider) {
 		isColliding = false;
 	}
 
@@ -68,15 +65,17 @@ public class InteractionVolume : MonoBehaviour {
 
 	void ActivateObject() {
 		//TODO: Subtract cost from player power.
+		gameObject.SetActive(false);
 	}
 
 	void UnlockBuilding() {
 		// TODO: Subtract cost from player power.
+		gameObject.SetActive(false);
 	}
 
 	void OpenArea() {
 		TileGenerator.Instance.GenerateTile(transform, isGoingDown);
-		this.GetComponent<InteractionVolume>().enabled = false;
+		gameObject.SetActive(false);
 		// TODO: Subtract cost from player power.
 	}
 }
