@@ -9,12 +9,12 @@ public class InteractionVolume : MonoBehaviour {
 	public enum InteractionTypes {
 		ActivateTheObject,
 		UnlockTheBuilding,
-		OpenTheArea
+		OpenNewArea
 	}
 	public InteractionTypes InteractionType { 
 		get { return this.interactionType; } 
 	}
-	public InteractionTypes interactionType = InteractionTypes.OpenTheArea;
+	public InteractionTypes interactionType = InteractionTypes.OpenNewArea;
 	public bool isGoingDown = false;
 
 	private Collider _collider;
@@ -22,6 +22,9 @@ public class InteractionVolume : MonoBehaviour {
 
 	void Awake() {
 		Instance = this;
+	}
+
+	void Start() {
 		_collider = GameObject.FindWithTag("Player").GetComponent<Collider>();
 	}
 	
@@ -40,10 +43,12 @@ public class InteractionVolume : MonoBehaviour {
 
 	void OnTriggerEnter(Collider _collider) {
 		isColliding = true;
+		Debug.Log("isColliding = TRUE");
 	}
 
 	void OnTriggerExit(Collider _collider) {
 		isColliding = false;
+		Debug.Log("isColliding = FALSE");
 	}
 
 	void DetectInput() {
@@ -56,7 +61,7 @@ public class InteractionVolume : MonoBehaviour {
 				case InteractionTypes.UnlockTheBuilding:
 					UnlockBuilding();
 					break;
-				case InteractionTypes.OpenTheArea:
+				case InteractionTypes.OpenNewArea:
 					OpenArea();
 					break;
 			}

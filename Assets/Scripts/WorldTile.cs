@@ -7,17 +7,21 @@ public class WorldTile : MonoBehaviour {
 	public enum TileTypes {
 		Cube,
 		Bridge,
-		Stairs
+		Stairs,
+		Pyramid,
+		Crossroads
 	}
 	public TileTypes TileType { get { return this.tileType; } }
 	public TileTypes tileType = TileTypes.Cube;
 	public bool isFirstTile = false;
 
 	private Transform _myTransform;
+	private Material _myMaterial;
 	private Vector3 _initialPosition = Vector3.zero;
 
 	void Awake() {
 		_myTransform = transform;
+		_myMaterial = _myTransform.GetComponent<MeshRenderer>().material;
 		_initialPosition = _myTransform.position;
 
 		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
@@ -28,7 +32,9 @@ public class WorldTile : MonoBehaviour {
 	}
 
 	void PlayIntroAnimation() {
-		_myTransform.position = new Vector3(_initialPosition.x, _initialPosition.y - 50f, _initialPosition.z);
-		_myTransform.DOMoveY(_initialPosition.y, 0.5f);
+		//_myTransform.position = new Vector3(_initialPosition.x, _initialPosition.y - 50f, _initialPosition.z);
+		//_myTransform.DOMoveY(_initialPosition.y, 1f);
+		_myMaterial.color = new Color(1f, 1f, 1f, 0f);
+		_myMaterial.DOFade(1f, 1f);
 	}
 }
