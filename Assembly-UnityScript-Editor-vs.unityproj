@@ -84,7 +84,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\ShaderForge\Example Assets\Shaders\MaterialPlatform.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\FisheyeShader.shader" />
-     <None Include="Assets\TransparentShaderForge.shader" />
+     <None Include="Assets\Shaders\TransparentShaderForge.shader" />
      <None Include="Assets\ShaderForge\Example Assets\Shaders\Vegetation.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\ShaderForge\Example Assets\Shaders\VertexAnimation.shader" />
@@ -172,6 +172,9 @@
  <Reference Include="Vectrosity">
  <HintPath>/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Plugins/Vectrosity.dll</HintPath>
  </Reference>
+ <Reference Include="ShaderForge">
+ <HintPath>/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/ShaderForge/Editor/Code/ShaderForge.dll</HintPath>
+ </Reference>
  <Reference Include="HOTween">
  <HintPath>/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Standard Assets/HOTween/HOTween.dll</HintPath>
  </Reference>
@@ -180,9 +183,6 @@
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
- </Reference>
- <Reference Include="ShaderForge">
- <HintPath>/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/ShaderForge/Editor/Code/ShaderForge.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

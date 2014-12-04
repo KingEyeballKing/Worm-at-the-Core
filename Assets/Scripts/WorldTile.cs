@@ -9,7 +9,8 @@ public class WorldTile : MonoBehaviour {
 		Bridge,
 		Stairs,
 		Pyramid,
-		Crossroads
+		Crossroads,
+		Mountain
 	}
 	public TileTypes TileType { get { return this.tileType; } }
 	public TileTypes tileType = TileTypes.Cube;
@@ -32,8 +33,8 @@ public class WorldTile : MonoBehaviour {
 	}
 
 	void PlayIntroAnimation() {
-		//_myTransform.position = new Vector3(_initialPosition.x, _initialPosition.y - 50f, _initialPosition.z);
-		//_myTransform.DOMoveY(_initialPosition.y, 1f);
+		_myTransform.position = new Vector3(_initialPosition.x, _initialPosition.y - 10f, _initialPosition.z);
+		_myTransform.DOMoveY(_initialPosition.y, 1f);
 		_myMaterial.color = new Color(1f, 1f, 1f, 0f);
 		_myMaterial.DOFade(1f, 1f);
 	}
