@@ -15,17 +15,31 @@ public class InteractionVolume : MonoBehaviour {
 		get { return this.interactionType; } 
 	}
 	public InteractionTypes interactionType = InteractionTypes.OpenNewArea;
+	public GameObject InteractionParticles;
 	public bool isGoingDown = false;
 
+	private Transform _transform;
 	private Collider _collider;
+	private GameObject _particles;
 	private bool isColliding = false;
 
 	void Awake() {
 		Instance = this;
+		_transform = transform;
 	}
 
 	void Start() {
 		_collider = GameObject.FindWithTag("Player").GetComponent<Collider>();
+
+		if (InteractionParticles != null) {
+			_particles = Instantiate(InteractionParticles, 
+			                         _transform.position + new Vector3(0f, 1f, 0f), 
+			                         _transform.rotation) as GameObject;
+			_particles.GetComponent<Transform>().parent = _transform;
+		}
+		else {
+			Debug.LogError("No prefab selected.");
+		}
 	}
 	
 	void Update() {
@@ -79,7 +93,7 @@ public class InteractionVolume : MonoBehaviour {
 	}
 
 	void OpenArea() {
-		TileGenerator.Instance.GenerateTile(transform, isGoingDown);
+		TileGenerator.Instance.GenerateTile(_transform, isGoingDown);
 		gameObject.SetActive(false);
 		// TODO: Subtract cost from player power.
 	}
