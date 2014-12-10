@@ -6,22 +6,28 @@ public class ThePlayer : MonoBehaviour {
 	public static ThePlayer Instance;
 	public Collider _collider;
 	public string _name = "";
+	public float currentPower;
+	public bool isDecaying = true;
+
 	private Transform _transform;
-
-	public static float currentPower;
-	// Determines whether power is growing or shrinking at the moment.
-	public static bool isDecaying = true;
-
 	private float startingPower = 100f;
-	// Power decay per second.
-	private float normalDecay = 0.1f;
-	private float powerMagnitude = 1.0f;
+	private float decayPerSecond = 0.1f;
+	private float _maxSpeed = 0f;
+	private float _speedPerPower = 0f;
+	// Duration of player life in minutes;
+	private float lifeDuration = 10f;
 
 	void Awake() {
 		Instance = this;
+
 		_collider = gameObject.GetComponent<CharacterController>().collider;
-		_name = "Player Name";
+		_name = "Name";
 		_transform = transform;
+
+		_maxSpeed = gameObject.GetComponent<PlayerMotor>().movement.maxSpeed;
+		_speedPerPower = _maxSpeed / startingPower;
+
+		decayPerSecond = startingPower / (lifeDuration * 60f);
 	}
 
 	void Start() {
@@ -30,20 +36,29 @@ public class ThePlayer : MonoBehaviour {
 
 	void Update() {
 		// Checks to see if there's any power left, if not player dies, exit function.
-		if (currentPower <= 0f)
-		{
+		if (currentPower <= 0f) {
 			currentPower = 0f;
-			// GameEventManager.TriggerPlayerDeath();
+			KillPlayer();
 		}
 		
 		// Normal decay.
-		if (currentPower >= normalDecay)
-			currentPower -= normalDecay * Time.deltaTime;
-		else if (currentPower < normalDecay)
+		if (currentPower >= decayPerSecond)
+			currentPower -= decayPerSecond * Time.deltaTime;
+		else if (currentPower < decayPerSecond)
 			currentPower = 0f;
+
+		ChangeAbilitiesBasedOnPower(currentPower);
 	}
 
-	private void ChangeAbilitiesBasedOnPower() {
+	private void ChangeAbilitiesBasedOnPower(float p) {
+		gameObject.GetComponent<PlayerMotor>().movement.maxSpeed = _speedPerPower * p;
 		// TODO: Connect with motor.
+	}
+
+	private void KillPlayer() {
+		// TODO: Stop input.
+		// TODO: Fade screen to black.
+		// TODO: Store position.
+		// TODO: Store game world state.
 	}
 }

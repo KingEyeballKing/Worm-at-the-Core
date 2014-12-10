@@ -29,9 +29,13 @@ public class PlayerMotor : MonoBehaviour
     public class CharacterMotorMovement
     {
         // The maximum horizontal speed when moving
-        public float maxForwardSpeed = 3.0f;
-        public float maxSidewaysSpeed = 2.0f;
-        public float maxBackwardsSpeed = 2.0f;
+        public float maxSpeed = 5f;
+        [HideInInspector]
+        public float maxForwardSpeed = 5f;
+        [HideInInspector]
+        public float maxSidewaysSpeed = 5f;
+        [HideInInspector]
+        public float maxBackwardsSpeed = 5f;
 
         // Curve for multiplying speed based on slope(negative = downwards)
         public AnimationCurve slopeSpeedMultiplier = new AnimationCurve(new Keyframe(-90, 1), new Keyframe(0, 1), new Keyframe(90, 0));
@@ -191,6 +195,10 @@ public class PlayerMotor : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         tr = transform;
+
+        movement.maxForwardSpeed = movement.maxSpeed;
+        movement.maxSidewaysSpeed = movement.maxSpeed * 0.75f;
+        movement.maxBackwardsSpeed = movement.maxSpeed * 0.75f;
     }
 
     private void UpdateFunction()

@@ -17,7 +17,7 @@ public class Soul : MonoBehaviour {
 		Light myLight = gameObject.AddComponent<Light>() as Light;
 		myLight.type = LightType.Point;
 		myLight.range = 5f;
-		myLight.intensity = 0.7f;
+		myLight.intensity = 0.3f;
 	}
 
 	void Start() {

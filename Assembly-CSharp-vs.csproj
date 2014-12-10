@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\DebugDraw.cs" />
      <Compile Include="Assets\Scripts\GameEventManager.cs" />
      <Compile Include="Assets\Scripts\GameUI.cs" />
+     <Compile Include="Assets\Scripts\Glyph.cs" />
      <Compile Include="Assets\Scripts\Helper.cs" />
      <Compile Include="Assets\Scripts\InputController.cs" />
      <Compile Include="Assets\Scripts\InteractionGraphic.cs" />

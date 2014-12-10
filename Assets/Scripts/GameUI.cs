@@ -6,10 +6,10 @@ using DG.Tweening;
 public class GameUI : MonoBehaviour {
 
 	public static GameUI Instance;
-	public Text myText;
+	public Text nameText, buttonPrompt;
 
-	private float fadeInDuration = 1f;
-	private float fadeOutDuration = 3f;
+	private float fadeInDuration = 0.5f;
+	private float fadeOutDuration = 4f;
 
 	void Awake() {
 		Instance = this;
@@ -17,11 +17,16 @@ public class GameUI : MonoBehaviour {
 		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
 		DOTween.defaultEaseType = Ease.InOutExpo;
 
-		myText.text = ThePlayer.Instance._name;
+		nameText.text = ThePlayer.Instance._name;
+		buttonPrompt.text = "";
+	}
+
+	void Start() {
+		FadeTextOut(nameText, 5f);
 	}
 
 	public void ShowFounderName(string newName, string tileType) {
-		myText.color -= new Color(0f, 0f, 0f, 1f);
+		nameText.color -= new Color(0f, 0f, 0f, 1f);
 		string t = "";
 		switch (tileType) {
 			case "pyramid":
@@ -34,29 +39,51 @@ public class GameUI : MonoBehaviour {
 				t = "Legacy";
 				break;
 		}
-		myText.text += "\n" + newName + "'s " + t;
-		FadeTextIn(fadeInDuration);
+		nameText.text = newName + "'s " + t;
+		FadeTextIn(nameText, fadeInDuration);
 	}
 
 	public void HideFounderName() {
-		FadeTextOut(fadeOutDuration);
+		FadeTextOut(nameText, fadeOutDuration);
 	}
 
 	public void ShowSoulName(string soulName) {
-		myText.color -= new Color(0f, 0f, 0f, 1f);
-		myText.text += "\n" + soulName + " died here.";
-		FadeTextIn(fadeInDuration);
+		nameText.color -= new Color(0f, 0f, 0f, 1f);
+		nameText.text = soulName + " died here.";
+		FadeTextIn(nameText, fadeInDuration);
 	}
 
 	public void HideSoulName() {
-		FadeTextOut(fadeOutDuration);
+		FadeTextOut(nameText, fadeOutDuration);
 	}
 
-	public void FadeTextIn(float d) {
-		myText.DOFade(1f, d);
+	public void ShowButtonPrompt(string buttonType) {
+		switch (buttonType) {
+			case "Fire1":
+				buttonPrompt.text = "Press A to interact";
+				break;
+			case "Jump":
+				buttonPrompt.text = "Press B to jump";
+				break;
+			case "Sprint":
+				buttonPrompt.text = "Hold Right Trigger to sprint";
+				break;
+			default:
+				buttonPrompt.text = "";
+				break;
+		}
+		FadeTextIn(buttonPrompt, 0.5f);
 	}
 
-	public void FadeTextOut(float d) {
-		myText.DOFade(0f, d);
+	public void HideButtonPrompt() {
+		FadeTextOut(buttonPrompt, 1f);
+	}
+
+	public void FadeTextIn(Text t, float d) {
+		t.DOFade(1f, d);
+	}
+
+	public void FadeTextOut(Text t, float d) {
+		t.DOFade(0f, d);
 	}
 }

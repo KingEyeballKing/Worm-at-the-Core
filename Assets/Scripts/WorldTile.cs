@@ -20,36 +20,39 @@ public class WorldTile : MonoBehaviour {
 	public TileTypes tileType = TileTypes.Cube;
 	public string typeString {
 		get {
+			string r = "legacy";
 			switch(this.tileType) {
 				case TileTypes.Mountain:
-					return "mountain";
+					r = "mountain";
 					break;
 				case TileTypes.Pyramid:
-					return "pyramid";
+					r = "pyramid";
 					break;
 				default:
-					return "legacy";
 					break;
 			}
+			return r;
 		}
 	}
 	public bool isFirstTile = false;
 	[HideInInspector]
 	public bool isEpic = false;
+	[HideInInspector]
+	public float powerCost = 5f;
 
 	private Transform _myTransform;
 	private Material _myMaterial;
-	private Color _myColor;
+	// private Color _myColor;
 	private Vector3 _initialPosition = Vector3.zero;
 
 	void Awake() {
 		Instance = this;
 		_myTransform = transform;
 		_myMaterial = _myTransform.GetComponent<MeshRenderer>().material;
-		_myColor = _myMaterial.color;
+		// _myColor = _myMaterial.color;
 		_initialPosition = _myTransform.position;
 
-		// Set Epic tile flag.
+		// Set Epic tile flag and Power Costs.
 		switch (tileType) {
 			case TileTypes.Mountain:
 				isEpic = true;
@@ -61,6 +64,7 @@ public class WorldTile : MonoBehaviour {
 				isEpic = false;
 				break;
 		}
+		if (isEpic) powerCost = 25f;
 
 		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
 		DOTween.defaultEaseType = Ease.OutExpo;
@@ -72,6 +76,11 @@ public class WorldTile : MonoBehaviour {
 				PlayIntroAnimation(2f);
 			}
 		}
+	}
+
+	void Start() {
+		// Subtract cost of this tile to player power.
+		GameObject.FindWithTag("Player").GetComponent<ThePlayer>().currentPower -= powerCost;
 	}
 
 	void PlayIntroAnimation(float d) {
