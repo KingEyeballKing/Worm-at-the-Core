@@ -7,6 +7,8 @@ Project("{31CA59CE-E817-EB24-2005-8A2B017E630F}") = "Worm at the Core Unity", "A
 EndProject
 Project("{31CA59CE-E817-EB24-2005-8A2B017E630F}") = "Worm at the Core Unity", "Assembly-UnityScript-firstpass.unityproj", "{42A25D71-1D39-D6DD-F701-200D7B3D2619}"
 EndProject
+Project("{31CA59CE-E817-EB24-2005-8A2B017E630F}") = "Worm at the Core Unity", "Assembly-UnityScript.unityproj", "{C3F34ECF-97FC-0E05-911A-885C574FDDA3}"
+EndProject
 Project("{31CA59CE-E817-EB24-2005-8A2B017E630F}") = "Worm at the Core Unity", "Assembly-UnityScript-Editor.unityproj", "{EDF3E1E4-A1EE-8CE1-C396-A5E7C6B9C1CF}"
 EndProject
 Global
@@ -27,6 +29,10 @@ Global
 		{42A25D71-1D39-D6DD-F701-200D7B3D2619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42A25D71-1D39-D6DD-F701-200D7B3D2619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42A25D71-1D39-D6DD-F701-200D7B3D2619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F34ECF-97FC-0E05-911A-885C574FDDA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F34ECF-97FC-0E05-911A-885C574FDDA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F34ECF-97FC-0E05-911A-885C574FDDA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F34ECF-97FC-0E05-911A-885C574FDDA3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EDF3E1E4-A1EE-8CE1-C396-A5E7C6B9C1CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDF3E1E4-A1EE-8CE1-C396-A5E7C6B9C1CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDF3E1E4-A1EE-8CE1-C396-A5E7C6B9C1CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,7 +41,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																									GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																															GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
