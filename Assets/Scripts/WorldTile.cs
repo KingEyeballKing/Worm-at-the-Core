@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 
 public class WorldTile : MonoBehaviour {
@@ -10,6 +11,7 @@ public class WorldTile : MonoBehaviour {
 		Cube,
 		Bridge,
 		Stairs,
+		StairsDown,
 		Pyramid,
 		Crossroads,
 		Mountain
@@ -66,16 +68,16 @@ public class WorldTile : MonoBehaviour {
 		}
 		if (isEpic) powerCost = 25f;
 
+		if (!isFirstTile) {
+			if (isEpic) { PlayIntroAnimation(5f); } 
+			else { PlayIntroAnimation(2f); }
+		} else {
+			if (GameControl.Instance != null)
+				GameControl.Instance.TilesList.Add(gameObject);
+		}
+
 		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
 		DOTween.defaultEaseType = Ease.OutExpo;
-
-		if (!isFirstTile) {
-			if (isEpic) {
-				PlayIntroAnimation(5f);
-			} else {
-				PlayIntroAnimation(2f);
-			}
-		}
 	}
 
 	void Start() {

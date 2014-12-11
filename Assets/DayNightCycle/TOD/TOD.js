@@ -2,6 +2,7 @@ var slider : float;
 var slider2 : float;
 var Hour : float;
 private var Tod: float;
+private var _startTime : float;
 
 var sun: Light;
 var Moon: GameObject;
@@ -29,12 +30,15 @@ var SkyBoxMaterial2 : Material;
 var SunNight : Color;
 var SunDay : Color;
 
-//THIS WAS ADDED IN TUTORIAL NUMBER 24. It allows for changing the color that reflects of a water object.
 //Uncheck IncludeWater if you are not interested in using this.
 var Water : GameObject;
 var IncludeWater = false;
 var WaterNight : Color;
 var WaterDay : Color;
+
+function Awake() {
+	_startTime = slider;
+}
 
 function OnGUI() {
 	if(slider >= 1.0) {
@@ -47,7 +51,7 @@ function Update() {
 	Hour = slider * 24;
 	Tod = slider2 * 24;
 	sun.transform.localEulerAngles = Vector3((slider * 360) -90, 0, 0);
-	slider = slider + Time.deltaTime/speed;
+	slider = (Time.realtimeSinceStartup / speed) + _startTime;
 	sun.color = Color.Lerp (SunNight, SunDay, slider * 2);
 
 	//Uncheck IncludeWater if you are not interested in using this.
@@ -58,7 +62,6 @@ function Update() {
 	if (slider < 0.5) {
 		slider2 = slider;
 	}
-
 	if (slider > 0.5) {
 		slider2 = (1 - slider);
 	}

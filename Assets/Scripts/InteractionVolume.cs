@@ -34,11 +34,12 @@ public class InteractionVolume : MonoBehaviour {
 
 	void Start() {
 		_collider = GameObject.FindWithTag("Player").GetComponent<Collider>();
-		_glyph = Instantiate(Resources.Load("Glyph_resource"), 
+		_glyph = Instantiate(Resources.Load("Glyph_src"), 
 		                         _transform.position + new Vector3(0f, 1f, 0f), 
 		                         _transform.rotation) as GameObject;
 		_glyph.GetComponent<Transform>().parent = _transform;
 		_glyphTransform = _glyph.GetComponent<Transform>();
+		_glyphTransform.parent = _transform;
 	}
 	
 	void Update() {
@@ -109,7 +110,7 @@ public class InteractionVolume : MonoBehaviour {
 
 		yield return new WaitForSeconds(duration);
 		
-		TileGenerator.Instance.GenerateTile(_transform, isGoingDown);
+		TileGenerator.Instance.GenerateTile(_transform);
 
 		yield return new WaitForSeconds(duration);
 

@@ -4,26 +4,29 @@ using DG.Tweening;
 
 public class Prop : MonoBehaviour {
 
-	private Transform _myTransform;
+	private Transform _transform;
 	private Material _myMaterial;
+	private Color _color;
 	private Vector3 _initialPosition = Vector3.zero;
 
 	void Awake() {
 		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
 		DOTween.defaultEaseType = Ease.Linear;
 
-		_myTransform = transform;
-		_myMaterial = _myTransform.GetComponent<MeshRenderer>().material;
-		_initialPosition = _myTransform.position;
+		_transform = transform;
+		_myMaterial = _transform.GetComponent<MeshRenderer>().material;
+		_color = _myMaterial.color;
+		_initialPosition = _transform.position;
 	}
 
 	void Start() {
-		PlayIntroAnimation(5f);
+		// _myMaterial.color -= new Color(0f, 0f, 0f, 0.5f);
 	}
 
-	void PlayIntroAnimation(float d) {
-		_myTransform.position = new Vector3(_initialPosition.x, _initialPosition.y - 2f, _initialPosition.z);
-		_myTransform.DOMoveY(_initialPosition.y, d);
-		_myMaterial.DOColor(Color.white, d).From();
+	public void Activate(float d) {
+		// _transform.position = new Vector3(_initialPosition.x, _initialPosition.y, _initialPosition.z);
+		// _transform.DOMoveY(_initialPosition.y, d);
+		_myMaterial.color = Color.white;
+		_myMaterial.DOColor(_color, d);
 	}
 }

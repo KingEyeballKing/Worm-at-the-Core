@@ -46,11 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Mixamo\BasicLocomotionPack\LocomotionScript.cs" />
-     <Compile Include="Assets\Scripts\Beacon.cs" />
      <Compile Include="Assets\Scripts\Building.cs" />
-     <Compile Include="Assets\Scripts\CharacterControllerLogic.cs" />
      <Compile Include="Assets\Scripts\DebugDraw.cs" />
+     <Compile Include="Assets\Scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\GameEventManager.cs" />
      <Compile Include="Assets\Scripts\GameUI.cs" />
      <Compile Include="Assets\Scripts\Glyph.cs" />
@@ -58,6 +56,7 @@
      <Compile Include="Assets\Scripts\InputController.cs" />
      <Compile Include="Assets\Scripts\InteractionGraphic.cs" />
      <Compile Include="Assets\Scripts\InteractionVolume.cs" />
+     <Compile Include="Assets\Scripts\InteractonMarker.cs" />
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\LoadGame.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
@@ -65,18 +64,12 @@
      <Compile Include="Assets\Scripts\NotificationsManager.cs" />
      <Compile Include="Assets\Scripts\Plaque.cs" />
      <Compile Include="Assets\Scripts\PlayerMotor.cs" />
-     <Compile Include="Assets\Scripts\PowerManager.cs" />
      <Compile Include="Assets\Scripts\Prop.cs" />
-     <Compile Include="Assets\Scripts\SceneViewCameraFollower.cs" />
+     <Compile Include="Assets\Scripts\PropsMarker.cs" />
      <Compile Include="Assets\Scripts\Soul.cs" />
-     <Compile Include="Assets\Scripts\TP_Animator.cs" />
-     <Compile Include="Assets\Scripts\TP_Camera.cs" />
-     <Compile Include="Assets\Scripts\TP_Controller.cs" />
-     <Compile Include="Assets\Scripts\TP_Motor.cs" />
      <Compile Include="Assets\Scripts\ThePlayer.cs" />
-     <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
-     <Compile Include="Assets\Scripts\ThirdPersonCameraEditor.cs" />
      <Compile Include="Assets\Scripts\TileGenerator.cs" />
+     <Compile Include="Assets\Scripts\TimeOfDay.cs" />
      <Compile Include="Assets\Scripts\WorldTile.cs" />
      <Compile Include="Assets\ShaderForge\Example Assets\Scripts\EditorLabel.cs" />
      <Compile Include="Assets\ShaderForge\Example Assets\Scripts\EnableCameraDepthInForward.cs" />
