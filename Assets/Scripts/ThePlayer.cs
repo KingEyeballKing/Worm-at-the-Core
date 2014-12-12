@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class ThePlayer : MonoBehaviour {
 
 	public static ThePlayer Instance;
 	public Collider _collider;
-	public string _name = "";
+	public string _name = "Nameless Human";
+	// public int _age = 0;
 	public float currentPower;
 	public bool isDecaying = true;
 	public bool isAlive = true;
@@ -23,7 +25,13 @@ public class ThePlayer : MonoBehaviour {
 	void Awake() {
 		Instance = this;
 
-		_name = "Name";
+		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
+		DOTween.defaultEaseType = Ease.OutExpo;
+
+		if(PlayerData.Instance != null)
+			_name = PlayerData.Instance.Name;
+
+		// _age = int.Parse((string)PlayerData.Instance.Age);
 		_collider = gameObject.GetComponent<CharacterController>().collider;
 		_transform = transform;
 

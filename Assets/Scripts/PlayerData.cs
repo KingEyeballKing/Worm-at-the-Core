@@ -6,7 +6,7 @@ public class PlayerData : MonoBehaviour {
 
 	public static PlayerData Instance;
 
-	public string Name = "";
+	public string Name = "Nameless Human";
 	public string Age = "";
 
 	void Awake() {
@@ -18,6 +18,8 @@ public class PlayerData : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		DontDestroyOnLoad(gameObject);
+
+		Screen.lockCursor = true;
 	}
 
 	public void EnterName(Text name) {

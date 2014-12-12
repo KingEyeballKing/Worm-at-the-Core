@@ -68,6 +68,9 @@ public class GameControl : MonoBehaviour {
 
 		GenerateSoul(_player.transform.position);
 
+		// Hide UI
+		GameUI.Instance.HideAll();
+
 		// Fade to black.
 		fadeImage.color = new Color(0f, 0f, 0f, 0f);
 		fadeImage.DOFade(1f, 10f).SetEase(Ease.Linear);
@@ -78,7 +81,15 @@ public class GameControl : MonoBehaviour {
 		_mainCamera.GetComponent<MouseLook>().SetControllable(false);
 		
 		// SaveWorld();
+
+		StartCoroutine("ResetGame");
+
 		// Application.Quit();
+	}
+
+	private IEnumerator ResetGame() {
+		yield return new WaitForSeconds(15f);
+		Application.LoadLevel(0);
 	}
 
 	private void GenerateSoul(Vector3 pos) {

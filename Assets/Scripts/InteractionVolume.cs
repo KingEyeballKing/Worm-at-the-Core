@@ -68,7 +68,7 @@ public class InteractionVolume : MonoBehaviour {
 	}
 
 	void DetectInput() {
-		if (Input.GetKeyDown(KeyCode.E)) {
+		if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonUp("Fire1")) {
 			GameUI.Instance.HideButtonPrompt();
 			// TODO: check player power first.
 			switch (interactionType) {

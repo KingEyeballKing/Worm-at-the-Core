@@ -19,14 +19,11 @@ public class PropsMarker : MonoBehaviour {
 
 		_playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
 
-		if (gameObject.GetComponent<Collider>() == null) {
-			gameObject.AddComponent<SphereCollider>();
-			_collider = gameObject.GetComponent<SphereCollider>();
-			_collider.isTrigger = true;
-			_collider.radius = 1f;
-		}
+		_collider = gameObject.AddComponent<SphereCollider>() as SphereCollider;
+		_collider.isTrigger = true;
+		_collider.radius = 2f;
 
-		_myProp = TileGenerator.Instance.GenerateProp(_transform);
+		GenerateProp(_transform);
 	}
 
 	void Update() {
@@ -43,10 +40,26 @@ public class PropsMarker : MonoBehaviour {
 		isColliding = false;
 	}
 
-	void DetectInput() {
+	private void DetectInput() {
 		if (Input.GetKeyDown(KeyCode.E)) {
 			if (_myProp != null)
 				_myProp.GetComponent<Prop>().Activate(2f);
+		}
+	}
+
+	private void GenerateProp(Transform originTransform) {
+		if (TileGenerator.Instance.PropsPool.Count > 0) {
+			int r = (int)UnityEngine.Random.Range(0, TileGenerator.Instance.PropsPool.Count);
+			if (TileGenerator.Instance.PropsPool[r] != null) {
+				GameObject newProp = Instantiate(TileGenerator.Instance.PropsPool[r], 
+				                                 originTransform.position,
+				                                 originTransform.rotation) as GameObject;
+				newProp.name = "Prop_0" + GameControl.Instance.PropsList.Count.ToString();
+				newProp.transform.parent = originTransform.parent;
+				GameControl.Instance.PropsList.Add(newProp);
+			} else {
+				Debug.LogError("Trying to instantiate a null tile!");
+			}
 		}
 	}
 }

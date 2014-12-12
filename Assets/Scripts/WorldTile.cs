@@ -63,9 +63,6 @@ public class WorldTile : MonoBehaviour {
 			if (GameControl.Instance != null)
 				GameControl.Instance.TilesList.Add(gameObject);
 		}
-
-		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
-		DOTween.defaultEaseType = Ease.OutExpo;
 	}
 
 	void Start() {
@@ -76,6 +73,7 @@ public class WorldTile : MonoBehaviour {
 				ToD.slider += powerCost;
 			}
 		}
+		SoundControl.Instance.PlayNote();
 	}
 
 	void PlayIntroAnimation(float d) {
@@ -83,7 +81,7 @@ public class WorldTile : MonoBehaviour {
 		_myTransform.DOMoveY(_initialPosition.y, d);
 		// _myMaterial.color -= new Color(0f, 0f, 0f, 1f);
 		// _myMaterial.DOFade(1f, 1f);
-		_myMaterial.DOColor(Color.white, d).From();
+		_myMaterial.DOColor(Color.white, d).From().SetEase(Ease.InExpo);
 		Camera.main.GetComponent<MainCamera>().ShakeCamera(d);
 	}
 }

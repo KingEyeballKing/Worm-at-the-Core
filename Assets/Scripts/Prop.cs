@@ -10,9 +10,6 @@ public class Prop : MonoBehaviour {
 	private Vector3 _initialPosition = Vector3.zero;
 
 	void Awake() {
-		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
-		DOTween.defaultEaseType = Ease.Linear;
-
 		_transform = transform;
 		_myMaterial = _transform.GetComponent<MeshRenderer>().material;
 		_color = _myMaterial.color;
@@ -20,13 +17,13 @@ public class Prop : MonoBehaviour {
 	}
 
 	void Start() {
-		// _myMaterial.color -= new Color(0f, 0f, 0f, 0.5f);
+		// _myMaterial.color = Color.black - new Color(0f, 0f, 0f, 0.5f);
 	}
 
 	public void Activate(float d) {
-		// _transform.position = new Vector3(_initialPosition.x, _initialPosition.y, _initialPosition.z);
-		// _transform.DOMoveY(_initialPosition.y, d);
-		_myMaterial.color = Color.white;
-		_myMaterial.DOColor(_color, d);
+		_transform.position = new Vector3(_initialPosition.x, _initialPosition.y - 5f, _initialPosition.z);
+		_transform.DOMoveY(_initialPosition.y, d);
+		// _myMaterial.color = Color.white;
+		// _myMaterial.DOColor(Color.white, d);
 	}
 }

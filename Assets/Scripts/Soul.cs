@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Soul : MonoBehaviour {
 
-	public string _mySoulName = "Dead player's name";
+	public string _mySoulName = "John";
 
 	private SphereCollider myCollider;
 	private Collider _playerCollider;
@@ -11,7 +11,7 @@ public class Soul : MonoBehaviour {
 
 	void Awake() {
 		myCollider = gameObject.AddComponent<SphereCollider>() as SphereCollider;
-		myCollider.radius = 1.5f;
+		myCollider.radius = 2f;
 		myCollider.isTrigger = true;
 
 		Light myLight = gameObject.AddComponent<Light>() as Light;

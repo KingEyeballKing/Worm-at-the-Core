@@ -71,27 +71,10 @@ public class TileGenerator : MonoBehaviour {
 			newPlaque.name = "Plaque_0" + GameControl.Instance.PlaquesList.Count.ToString();
 			newPlaque.GetComponent<Plaque>()._myName = ThePlayer.Instance._name;
 			newPlaque.GetComponent<Plaque>()._myType = newTile.GetComponent<WorldTile>().typeString;
+			newPlaque.transform.parent = originTransform.parent;
 			GameControl.Instance.PlaquesList.Add(newPlaque);
 		} else {
 			Debug.LogError("No Plaque game object!");
 		}
-	}
-
-	public GameObject GenerateProp(Transform originTransform) {
-		if (PropsPool.Count > 0) {
-			Vector3 randPos = Vector3.zero;
-			int r = (int)UnityEngine.Random.Range(0, PropsPool.Count);
-			if (PropsPool[r] != null) {
-				GameObject newProp = Instantiate(PropsPool[r], 
-				                                 originTransform.position + randPos,
-				                                 originTransform.rotation) as GameObject;
-				newProp.name = "Prop_0" + GameControl.Instance.PropsList.Count.ToString();
-				GameControl.Instance.PropsList.Add(newProp);
-				return newProp;
-			} else {
-				Debug.LogError("Trying to instantiate a null tile!");
-				return null;
-			}
-		} else { return null; }
 	}
 }

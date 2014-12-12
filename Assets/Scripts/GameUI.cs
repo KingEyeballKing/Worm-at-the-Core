@@ -9,24 +9,20 @@ public class GameUI : MonoBehaviour {
 	public Text nameText, buttonPrompt;
 
 	private float fadeInDuration = 0.5f;
-	private float fadeOutDuration = 4f;
+	private float fadeOutDuration = 0.5f;
 
 	void Awake() {
 		Instance = this;
-
-		DOTween.Init(true, true, LogBehaviour.ErrorsOnly);
-		DOTween.defaultEaseType = Ease.InOutExpo;
-
-		nameText.text = ThePlayer.Instance._name;
-		buttonPrompt.text = "";
 	}
 
 	void Start() {
-		FadeTextOut(nameText, 5f);
+		nameText.text = ThePlayer.Instance._name + ", you have one life.";
+		buttonPrompt.text = "";
+
+		FadeTextOut(nameText, 15f);
 	}
 
 	public void ShowFounderName(string newName, string tileType) {
-		nameText.color -= new Color(0f, 0f, 0f, 1f);
 		string t = "";
 		switch (tileType) {
 			case "pyramid":
@@ -39,22 +35,21 @@ public class GameUI : MonoBehaviour {
 				t = "Legacy";
 				break;
 		}
-		nameText.text = newName + "'s " + t;
-		FadeTextIn(nameText, fadeInDuration);
+		buttonPrompt.text = newName + "'s " + t;
+		FadeTextIn(buttonPrompt, fadeInDuration);
 	}
 
 	public void HideFounderName() {
-		FadeTextOut(nameText, fadeOutDuration);
+		FadeTextOut(buttonPrompt, fadeOutDuration);
 	}
 
 	public void ShowSoulName(string soulName) {
-		nameText.color -= new Color(0f, 0f, 0f, 1f);
-		nameText.text = soulName + " died here.";
-		FadeTextIn(nameText, fadeInDuration);
+		FadeTextIn(buttonPrompt, fadeInDuration);
+		buttonPrompt.text = soulName + " died here.";
 	}
 
 	public void HideSoulName() {
-		FadeTextOut(nameText, fadeOutDuration);
+		FadeTextOut(buttonPrompt, fadeOutDuration);
 	}
 
 	public void ShowButtonPrompt(string buttonType) {
@@ -76,7 +71,12 @@ public class GameUI : MonoBehaviour {
 	}
 
 	public void HideButtonPrompt() {
-		FadeTextOut(buttonPrompt, 1f);
+		FadeTextOut(buttonPrompt, 0.5f);
+	}
+
+	public void HideAll() {
+		FadeTextOut(buttonPrompt, 0.5f);
+		FadeTextOut(nameText, 0.5f);
 	}
 
 	public void FadeTextIn(Text t, float d) {
