@@ -37,15 +37,14 @@ public class WorldTile : MonoBehaviour {
 		}
 	}
 	public bool isFirstTile = false;
-	[HideInInspector]
 	public bool isEpic = false;
-	[HideInInspector]
-	public float powerCost = 5f;
+	public float powerCost = 0.1f;
 
 	private Transform _myTransform;
 	private Material _myMaterial;
 	// private Color _myColor;
 	private Vector3 _initialPosition = Vector3.zero;
+	private GameObject _timeOfDay;
 
 	void Awake() {
 		Instance = this;
@@ -53,20 +52,9 @@ public class WorldTile : MonoBehaviour {
 		_myMaterial = _myTransform.GetComponent<MeshRenderer>().material;
 		// _myColor = _myMaterial.color;
 		_initialPosition = _myTransform.position;
+		_timeOfDay = GameObject.FindWithTag("TimeOfDay");
 
-		// Set Epic tile flag and Power Costs.
-		switch (tileType) {
-			case TileTypes.Mountain:
-				isEpic = true;
-				break;
-			case TileTypes.Pyramid:
-				isEpic = true;
-				break;
-			default:
-				isEpic = false;
-				break;
-		}
-		if (isEpic) powerCost = 25f;
+		if (isEpic) { powerCost = 0f - powerCost; }
 
 		if (!isFirstTile) {
 			if (isEpic) { PlayIntroAnimation(5f); } 
@@ -81,8 +69,13 @@ public class WorldTile : MonoBehaviour {
 	}
 
 	void Start() {
-		// Subtract cost of this tile to player power.
-		GameObject.FindWithTag("Player").GetComponent<ThePlayer>().currentPower -= powerCost;
+		// Subtract cost of this tile to player power. If it's EPIC, add to power instead.
+		if (!isFirstTile) {
+			var ToD = _timeOfDay.GetComponent<TimeOfDay>();
+			if (ToD.slider > powerCost || isEpic) {
+				ToD.slider += powerCost;
+			}
+		}
 	}
 
 	void PlayIntroAnimation(float d) {

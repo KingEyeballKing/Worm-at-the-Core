@@ -629,7 +629,7 @@ public class PlayerMotor : MonoBehaviour
         return inputMoveDirection;
     }
 
-    void SetControllable(bool controllable)
+    public void SetControllable(bool controllable)
     {
         canControl = controllable;
     }

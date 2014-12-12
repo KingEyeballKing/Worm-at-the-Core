@@ -8,6 +8,7 @@ public class ThePlayer : MonoBehaviour {
 	public string _name = "";
 	public float currentPower;
 	public bool isDecaying = true;
+	public bool isAlive = true;
 	public GameObject TimeOfDayPrefab;
 
 	private Transform _transform;
@@ -37,49 +38,36 @@ public class ThePlayer : MonoBehaviour {
 	}
 
 	void Update() {
-		// Checks to see if there's any power left, if not player dies, exit function.
+		// If the player is dead, do nothing.
+		if (!isAlive) return;
+
+		// Checks to see if there's any power left, if not player dies.
 		if (currentPower <= 0f) {
 			currentPower = 0f;
 			Die();
 		}
 
 		// Normal decay.
-		if (currentPower >= decayPerSecond)
-			currentPower -= decayPerSecond * Time.deltaTime;
-		else if (currentPower < decayPerSecond)
-			currentPower = 0f;
+		// if (currentPower >= decayPerSecond)
+		// 	currentPower -= decayPerSecond * Time.deltaTime;
+		// else if (currentPower < decayPerSecond)
+		// 	currentPower = 0f;
 
+		currentPower = ChangePowerBasedOnTOD();
 		ChangeAbilitiesBasedOnPower(currentPower);
-		ChangeTODBasedOnPower(currentPower);
 	}
 
 	private void ChangeAbilitiesBasedOnPower(float p) {
 		gameObject.GetComponent<PlayerMotor>().movement.maxSpeed = _speedPerPower * p;
 	}
 
-	private void ChangeTODBasedOnPower(float p) {
-
-	}
-
-	private void GenerateSoul(Vector3 pos) {
-		var newSoul = GameObject.Instantiate(Resources.Load("Soul_src"), pos, Quaternion.identity) as GameObject;
-		GameControl.Instance.SoulsList.Add(newSoul);
+	private float ChangePowerBasedOnTOD() {
+		var c = 100f - (TimeOfDayPrefab.GetComponent<TimeOfDay>().slider - TimeOfDayPrefab.GetComponent<TimeOfDay>()._startSlider) * 100f;
+		return c;
 	}
 
 	private void Die() {
-		StartCoroutine("CoDie");
-	}
-
-	private IEnumerator CoDie() {
-		// TODO: Stop input.
-		
-		// TODO: Fade screen to black.
-
-		// TODO: Check if player is grounded and then generate soul.
-		// If not, add them to the Wall of the Fallen.
-		GenerateSoul(_transform.position);
-
-		GameControl.Instance.SaveWorld();
-		yield break;
+		GameControl.Instance.TriggerDeath();
+		isAlive = false;
 	}
 }

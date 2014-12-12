@@ -28,9 +28,13 @@ public class MouseLook : MonoBehaviour {
 	public float minimumY = -60f;
 	public float maximumY = 60f;
 
+	[HideInInspector]
+	public bool isControllable = true;
+
 	float rotationY = 0f;
 
 	void Update() {
+		if (!isControllable) return;
 		if (axes == RotationAxes.MouseXAndY) {
 			float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 			rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
@@ -49,5 +53,9 @@ public class MouseLook : MonoBehaviour {
 		// Make the rigid body not change rotation
 		if (GetComponent<Rigidbody>())
 			GetComponent<Rigidbody>().freezeRotation = true;
+	}
+
+	public void SetControllable(bool b) {
+		isControllable = b;
 	}
 }

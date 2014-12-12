@@ -5,9 +5,9 @@ public class TimeOfDay : MonoBehaviour {
 	
 	public float slider = 0f;
 	public float slider2 = 0f;
+	public float _startSlider = 0f;
 	public float Hour = 0f;
 	private float ToD = 0f;
-	private float _startTime = 0f;
 
 	public Light Sun;
 	public GameObject Moon;
@@ -35,8 +35,11 @@ public class TimeOfDay : MonoBehaviour {
 	public Color SunNight;
 	public Color SunDay;
 
+	private ThePlayer _player;
+
 	void Awake() {
-		_startTime = slider;
+		_startSlider = slider;
+		_player = GameObject.FindWithTag("Player").GetComponent<ThePlayer>();
 	}
 
 	void OnGUI() {
@@ -50,7 +53,13 @@ public class TimeOfDay : MonoBehaviour {
 		Hour = slider * 24f;
 		ToD = slider2 * 24f;
 		Sun.transform.localEulerAngles = new Vector3((slider * 360f) - 90f, 0f, 0f);
-		slider = (Time.realtimeSinceStartup / speed) + _startTime;
+
+		// Only animate slider if player is alive.
+		if (_player.isAlive)
+			slider = (Time.realtimeSinceStartup / speed) + _startSlider;
+		else
+			slider = 1f;
+
 		Sun.color = Color.Lerp(SunNight, SunDay, slider * 2f);
 
 		if (slider < 0.5f) { 

@@ -4,6 +4,6 @@ using System.Collections;
 public class LoadGame : MonoBehaviour {
 
 	public void LoadGameWorld() {
-		Application.LoadLevel(2);
+		Application.LoadLevelAsync("World");
 	}
 }

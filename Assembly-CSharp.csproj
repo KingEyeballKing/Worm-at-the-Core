@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\MainLight.cs" />
      <Compile Include="Assets\Scripts\NotificationsManager.cs" />
      <Compile Include="Assets\Scripts\Plaque.cs" />
+     <Compile Include="Assets\Scripts\PlayerData.cs" />
      <Compile Include="Assets\Scripts\PlayerMotor.cs" />
      <Compile Include="Assets\Scripts\Prop.cs" />
      <Compile Include="Assets\Scripts\PropsMarker.cs" />
