@@ -2,31 +2,9 @@ Base path: /Applications/Unity/Unity.app/Contents
 Pipe name: \\.\pipe\UnityShaderCompiler-4--1331949568
 Cmd: getPlatforms
 Cmd: compileSnippet
-  api=0 type=0 insize=2189 outsize=660 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+  api=0 type=0 insize=1518 outsize=332 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=2230 outsize=781 kw=SPOT SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=2230 outsize=767 kw=DIRECTIONAL SHADOWS_SCREEN ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=2230 outsize=784 kw=POINT_COOKIE SHADOWS_CUBE ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=2230 outsize=784 kw=POINT_COOKIE SHADOWS_CUBE SHADOWS_SOFT ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=2710 outsize=888 kw=LIGHTMAP_ON DIRLIGHTMAP_OFF HDR_LIGHT_PREPASS_ON ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=2710 outsize=283 kw=LIGHTMAP_ON DIRLIGHTMAP_OFF HDR_LIGHT_PREPASS_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=0 insize=2189 outsize=660 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_ON DIRLIGHTMAP_ON ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=2189 outsize=488 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=2189 outsize=580 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_ON DIRLIGHTMAP_ON ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=2230 outsize=660 kw=POINT_COOKIE SHADOWS_OFF ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=2230 outsize=964 kw=SPOT SHADOWS_DEPTH SHADOWS_NATIVE ok=1
-Cmd: compileSnippet
-  api=0 type=1 insize=2230 outsize=1365 kw=SPOT SHADOWS_DEPTH SHADOWS_SOFT SHADOWS_NATIVE ok=1
+  api=0 type=1 insize=1518 outsize=248 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 End of pipe
 
 Quitting shader compiler process

@@ -71,9 +71,9 @@ public class TimeOfDay : MonoBehaviour {
 
 		Sun.intensity = (slider2 - 0.2f) * 1.7f;
 
-		float targetAlpha = (ToD <= 4.5f && ToD >= 18f) ? 1f : 0f;
-		float curAlpha = Moon.renderer.material.GetFloat("_Alpha");
-		Moon.renderer.material.SetFloat("_Alpha", Mathf.Lerp(curAlpha, targetAlpha, Time.deltaTime * 0.2f));
+		// float targetAlpha = (ToD <= 4.5f && ToD >= 18f) ? 1f : 0f;
+		// float curAlpha = Moon.renderer.material.GetFloat("_Alpha");
+		// Moon.renderer.material.SetFloat("_Alpha", Mathf.Lerp(curAlpha, targetAlpha, Time.deltaTime * 0.2f));
 
 		// SKYBOX
 		if (ToD < 4f) {
