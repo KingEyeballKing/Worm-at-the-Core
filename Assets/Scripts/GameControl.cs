@@ -63,7 +63,6 @@ public class GameControl : MonoBehaviour {
 
 	public void TriggerDeath() {
 		_player.GetComponent<ThePlayer>().isAlive = false;
-
 		_timeOfDay.GetComponent<TimeOfDay>().slider = 1f;
 
 		GenerateSoul(_player.transform.position);
@@ -73,7 +72,7 @@ public class GameControl : MonoBehaviour {
 
 		// Fade to black.
 		fadeImage.color = new Color(0f, 0f, 0f, 0f);
-		fadeImage.DOFade(1f, 10f).SetEase(Ease.Linear);
+		fadeImage.DOFade(1f, 5f).SetEase(Ease.Linear);
 
 		// Disable input.
 		_player.GetComponent<PlayerMotor>().SetControllable(false);

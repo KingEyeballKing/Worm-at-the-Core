@@ -18,9 +18,6 @@ public class ThePlayer : MonoBehaviour {
 	private float decayPerSecond = 0.1f;
 	private float _maxSpeed = 0f;
 	private float _speedPerPower = 0f;
-	// private float _startTime = 0f;
-	// Duration of player life in minutes;
-	private float lifeDuration = 10f;
 
 	void Awake() {
 		Instance = this;
@@ -37,8 +34,6 @@ public class ThePlayer : MonoBehaviour {
 
 		_maxSpeed = gameObject.GetComponent<PlayerMotor>().movement.maxSpeed;
 		_speedPerPower = _maxSpeed / startingPower;
-
-		decayPerSecond = startingPower / (lifeDuration * 60f);
 	}
 
 	void Start() {
@@ -55,22 +50,13 @@ public class ThePlayer : MonoBehaviour {
 			Die();
 		}
 
-		// Normal decay.
-		// if (currentPower >= decayPerSecond)
-		// 	currentPower -= decayPerSecond * Time.deltaTime;
-		// else if (currentPower < decayPerSecond)
-		// 	currentPower = 0f;
-
 		currentPower = ChangePowerBasedOnTOD();
-		ChangeAbilitiesBasedOnPower(currentPower);
-	}
-
-	private void ChangeAbilitiesBasedOnPower(float p) {
-		gameObject.GetComponent<PlayerMotor>().movement.maxSpeed = _speedPerPower * p;
+		gameObject.GetComponent<PlayerMotor>().movement.maxSpeed = _maxSpeed * (currentPower / 100f);
 	}
 
 	private float ChangePowerBasedOnTOD() {
-		var c = 100f - (TimeOfDayPrefab.GetComponent<TimeOfDay>().slider - TimeOfDayPrefab.GetComponent<TimeOfDay>()._startSlider) * 100f;
+		var c = startingPower;
+		c -= (TimeOfDayPrefab.GetComponent<TimeOfDay>().slider - TimeOfDayPrefab.GetComponent<TimeOfDay>()._startSlider) * 100f;
 		return c;
 	}
 

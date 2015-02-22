@@ -4,6 +4,190 @@
 		"selected_items":
 		[
 			[
+				"hide",
+				"HideInInspector"
+			],
+			[
+				"Random",
+				"Random.Range(min, max)"
+			],
+			[
+				"FindObjectWith",
+				"GameObject.FindGameObjectsWithTag(tag)"
+			],
+			[
+				"GetButt",
+				"Input.GetButtonUp(buttonName)"
+			],
+			[
+				"Key",
+				"KeyCode"
+			],
+			[
+				"getcompo",
+				"Component.GetComponent<T>()"
+			],
+			[
+				"Getcompo",
+				"GameObject.GetComponents(type)"
+			],
+			[
+				"GetComponent",
+				"GameObject.GetComponentInParent()"
+			],
+			[
+				"GetComponentIn",
+				"GameObject.GetComponentInChildren(type)"
+			],
+			[
+				"MouseCur",
+				"MouseCursor.FPS"
+			],
+			[
+				"DebugLog",
+				"Debug.LogError(message)"
+			],
+			[
+				"Findwith",
+				"GameObject.FindWithTag(tag)"
+			],
+			[
+				"Application",
+				"Application.Quit()"
+			],
+			[
+				"LoadLevelAs",
+				"Application.LoadLevelAsync(levelName)"
+			],
+			[
+				"HorizontalSlider",
+				"GUI.HorizontalSlider(position, value, leftValue, rightValue)"
+			],
+			[
+				"_glyph",
+				"_glyphTransform"
+			],
+			[
+				"SphereC",
+				"SphereCollider"
+			],
+			[
+				"Debug",
+				"Debug.LogError(message)"
+			],
+			[
+				"persistent",
+				"Application.persistentDataPath"
+			],
+			[
+				"Particle",
+				"ParticleSystem"
+			],
+			[
+				"Prefab",
+				"PrefabType"
+			],
+			[
+				"Resources",
+				"Resources.Load(path)"
+			],
+			[
+				"WaitFor",
+				"WaitForSeconds(seconds)"
+			],
+			[
+				"Waitfr",
+				"WaitForSeconds(seconds)"
+			],
+			[
+				"Wait",
+				"WaitForSeconds(seconds)"
+			],
+			[
+				"Hide",
+				"HideInInspector"
+			],
+			[
+				"totalNumberOf",
+				"totalNumberOfTiles"
+			],
+			[
+				"Camra",
+				"Camera.main"
+			],
+			[
+				"getCompo",
+				"GameObject.GetComponents(type)"
+			],
+			[
+				"findob",
+				"GameObject.FindGameObjectsWithTag(tag)"
+			],
+			[
+				"_my",
+				"_myMaterial"
+			],
+			[
+				"On",
+				"OnCollisionExit	collision"
+			],
+			[
+				"Error",
+				"Debug.LogError(message)"
+			],
+			[
+				"wait",
+				"WaitForSeconds(seconds)"
+			],
+			[
+				"Sphere",
+				"SphereCollider"
+			],
+			[
+				"Vector",
+				"Vector3"
+			],
+			[
+				"Vec",
+				"Vector3	x, y, z"
+			],
+			[
+				"Trans",
+				"Transform"
+			],
+			[
+				"Euler",
+				"Transform.localEulerAngles"
+			],
+			[
+				"Color",
+				"Color()"
+			],
+			[
+				"zero",
+				"Vector3.zero"
+			],
+			[
+				"blue",
+				"Color.blue"
+			],
+			[
+				"position",
+				"position	Transform.*"
+			],
+			[
+				"spherecol",
+				"sphereCollider.radius	[property]"
+			],
+			[
+				"sphereColl",
+				"sphereCollider.center	[property]"
+			],
+			[
+				"ondraw",
+				"onDrawGizmos	ScriptableWizard.*()"
+			],
+			[
 				"Open",
 				"OpenTheArea"
 			],
@@ -111,38 +295,11 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "using UnityEngine;\nusing System.Collections;\nusing System.Collections.Generic;\n\npublic class InteractionVolume : MonoBehaviour {\n\n	public enum InteractionTypes {\n		ActivateTheObject,\n		UnlockTheBuilding,\n		OpenTheArea\n	}\n	public InteractionTypes InteractionType { get { return this.interactionType; } }\n	public InteractionTypes interactionType = InteractionTypes.OpenTheArea;\n\n	private Collider playerCollider;\n	private bool isColliding = false;\n	private GameObject newTile;\n\n	void Start() {\n		playerCollider = GameObject.FindWithTag(\"Player\").GetComponent<Collider>();\n	}\n	\n	void Update() {\n		// Start detecting input when player is in the vicinity.\n		if (isColliding) {\n			DetectInput();\n		}\n	}\n\n	void OnTriggerEnter(Collider playerCollider) {\n		isColliding = true;\n	}\n\n	void OnTriggerExit(Collider playerCollider) {\n		isColliding = false;\n	}\n\n	void DetectInput() {\n		if (Input.GetKeyDown(KeyCode.E)) {\n			// TODO: check player power first.\n			switch (interactionType) {\n				case InteractionTypes.ActivateTheObject:\n					ActivateObject();\n					break;\n				case InteractionTypes.UnlockTheBuilding:\n					UnlockBuilding();\n					break;\n				case InteractionTypes.OpenTheArea:\n					OpenArea();\n					break;\n			}\n		}\n	}\n\n	void ActivateObject() {\n		//TODO: Subtract cost from player power.\n	}\n\n	void UnlockBuilding() {\n		// TODO: Subtract cost from player power.\n	}\n\n	void OpenArea() {\n		GenerateTile(transform);\n		// TODO: Subtract cost from player power.\n	}\n\n	public void GenerateTile(Transform originTransform) {\n		if (TileGenerator.Instance.TilesPool.Count > 0) {\n			int k = (int)UnityEngine.Random.Range(0, TileGenerator.Instance.TilesPool.Count);\n			newTile = Instantiate(TileGenerator.Instance.TilesPool[k], \n			                      originTransform.position, \n			                      new Quaternion(0, 180, 0, 0)) as GameObject;\n			newTile.name = \"Tile_0\" + TileGenerator.Instance.totalNumberOfTiles.ToString();\n			newTile.transform.parent = originTransform.parent;\n			TileGenerator.Instance.totalNumberOfTiles++;\n			Debug.Log(TileGenerator.Instance.totalNumberOfTiles.ToString());\n			originTransform.GetComponent<InteractionVolume>().enabled = false;\n		} \n	}\n}\n",
-			"file": "InteractionVolume.cs",
-			"file_size": 2165,
-			"file_write_time": 130614527340000000,
-			"settings":
-			{
-				"buffer_size": 2163,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "TileGenerator.cs",
-			"settings":
-			{
-				"buffer_size": 302,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/turista/WRK/Otom/Otom-patterns/Assets/Scripts/Sphere.cs",
-			"settings":
-			{
-				"buffer_size": 13443,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Unity3D Build System/Unity.sublime-build",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 388.0,
 		"selected_items":
 		[
 			[
@@ -151,7 +308,15 @@
 			],
 			[
 				"pack",
-				"Package Control: Upgrade Package"
+				"Package Control: Install Package"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
 			],
 			[
 				"",
@@ -178,7 +343,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 756.0
+		"width": 674.0
 	},
 	"console":
 	{
@@ -200,16 +365,77 @@
 	},
 	"file_history":
 	[
-		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/SoundControl.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Standard Assets/Character Controllers/Sources/Scripts/MouseLook.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/InteractionVolume.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/InteractonMarker.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/WorldTile.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/GameControl.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/ThePlayer.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/TimeOfDay.cs",
+		"/Users/turista/Desktop/data.json",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/PropsMarker.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/Plaque.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/Prop.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/GameUI.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/TileGenerator.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/InputController.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/LevelLoader.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/Soul.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/SoundControl.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/NameCanvas.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/MainCamera.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/TitleScreen.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/PlayerData.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/DeathVolume.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/NameCanvas.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/NameField.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/TitleScreen.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/CanvasAnim.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/LoadGame.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/PlayerMotor.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/PlayerData.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/DayNightCycle/TOD/TOD.js",
 		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/PowerManager.cs",
+		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/UnityC#.sublime-settings",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/PropsMarker.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/InteractonMarker.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/Glyph.cs",
+		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/DayNightCycle/TOD/shader/MoonShader.shader",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/MainLight.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/MainCamera.cs",
 		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/CharacterControllerLogic.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Shaders/MyTransparent.shader",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Shaders/DiffuseFade.shader",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Shaders/TransparentShadow.shader",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Shaders/TransparentShaderForge.shader",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/InputController.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/PlayerMotor.cs",
+		"/Users/turista/Downloads/$FPSInputController.cs",
+		"/Users/turista/Downloads/$CharacterMotor.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Standard Assets/Character Controllers/Sources/Scripts/CharacterMotor.js",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/GameEventManager.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Soul.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/InteractionGraphic.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/InteractionGraphic.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/GameUI.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Prop.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Temp/Compiled-TransparentShaderForge-.shader",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/LoadGame.cs",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Standard Assets/Character Controllers/Sources/Scripts/FPSInputController.js",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Player.cs",
 		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/ThirdPersonCamera.cs",
+		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/Plain text.sublime-settings",
+		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll",
+		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Tile.cs",
+		"/Users/turista/WRK/Otom/Otom-patterns/Assets/Scripts/Sphere.cs",
 		"/Users/turista/WRK/Otom/Otom-patterns/Assets/Scripts/Dot.cs",
 		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/Beacon.cs",
 		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
 		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Building.cs",
-		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/GameEventManager.cs",
 		"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts/NotificationsManager.cs",
 		"/Users/turista/WRK/Testing Grounds/Assets/PorglezompPyroclastics/Editor/CJPyroclasticMaterialEditor.cs",
 		"/Users/turista/WRK/DANM/Open Studio/Worm at the Core/Assets/Scripts/CharacterControllerLogic.cs",
@@ -251,7 +477,6 @@
 		"/Users/turista/WRK/Otom/Otom-patterns/Assets/Scripts/Managers/PowerUpsManager.cs",
 		"/Applications/Sublime Text.app/Contents/MacOS/changelog.txt",
 		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/C#.sublime-settings",
-		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/UnityC#.sublime-settings",
 		"/Users/turista/Documents/safari.css",
 		"/Users/turista/Downloads/Museo Sans 500-Webfont/Webfonts/museosans_500_macroman/stylesheet.css",
 		"/Users/turista/Downloads/Museo Sans 500 Italic-Webfont/Webfonts/museosans_500italic/stylesheet.css",
@@ -260,7 +485,6 @@
 		"/Users/turista/WRK/Flappy Thing/FlappyThing.html",
 		"/Users/turista/WRK/Gast/Assets/Code/InputManager.cs",
 		"/Users/turista/WRK/Gast/Assets/Code/Piece.cs",
-		"/Users/turista/WRK/Otom/Otom-patterns/Assets/Scripts/Sphere.cs",
 		"/Users/turista/Library/Application Support/Sublime Text 3/Packages/User/Markdown.sublime-settings",
 		"/Users/turista/WRK/Otom/Otom-patterns/Assets/Scripts/BG.cs",
 		"/Users/turista/WRK/Otom/Otom-patterns/Otom-patterns.sln",
@@ -275,13 +499,63 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/turista/WRK/DANM/Worm at the Core/Worm at the Core Unity/Assets/Scripts",
+			""
 		]
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"moon",
+			"PropsPool",
+			"buttonText",
+			"SetControllable",
+			"canControl",
+			"_startTime",
+			"Linear",
+			"Tod",
+			"_myTransform",
+			"KillPlayer",
+			"newPlaque",
+			"GameControl.",
+			"gameControl",
+			"TilesList",
+			"totalNumberOfTiles",
+			"_originalSpeed",
+			"frameVelocity",
+			"velocity",
+			"speed",
+			"maxForwardSpeed",
+			"normalDecay",
+			"energyCost",
+			"myText",
+			"glyph",
+			"Glyph",
+			"glyph",
+			"Glyph",
+			"glyph",
+			"InteractionGraphic",
+			"_graphic",
+			"_particles",
+			"InteractionParticles",
+			"3f",
+			"CharacterMotor",
+			"transform",
+			"myParticles",
+			"_myTransform",
+			"_collider",
+			"myCollider",
+			"OpenTheArea",
+			"playerCollider",
+			"CharacterController",
+			"playerController",
+			"playerCollider",
+			"pos",
+			"startPosition",
+			"isGoingUp",
+			"TileGenerator.Instance.",
 			"TilesList",
 			"openArea",
 			"unlockBuilding",
@@ -332,95 +606,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "InteractionVolume.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2163,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								364,
-								364
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "TileGenerator.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 302,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								225,
-								225
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/Users/turista/WRK/Otom/Otom-patterns/Assets/Scripts/Sphere.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13443,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6380,
-								6330
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1857.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -502,7 +689,7 @@
 	"show_tabs": true,
 	"side_bar_visible": false,
 	"side_bar_width": 190.0,
-	"status_bar_visible": true,
+	"status_bar_visible": false,
 	"template_settings":
 	{
 	}

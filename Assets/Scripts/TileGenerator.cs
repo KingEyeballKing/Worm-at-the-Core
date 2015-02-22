@@ -57,7 +57,7 @@ public class TileGenerator : MonoBehaviour {
 					GameControl.Instance.TilesList.Add(newTile);
 					Debug.Log("Total number of tiles = " + GameControl.Instance.TilesList.Count.ToString());
 				} else {
-						Debug.LogError("Trying to instantiate a null tile!");
+					Debug.LogError("Trying to instantiate a null tile!");
 				}
 			} 
 		}

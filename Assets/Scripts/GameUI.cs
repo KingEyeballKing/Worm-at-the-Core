@@ -55,13 +55,13 @@ public class GameUI : MonoBehaviour {
 	public void ShowButtonPrompt(string buttonType) {
 		switch (buttonType) {
 			case "Fire1":
-				buttonPrompt.text = "Press A to interact";
+				buttonPrompt.text = "Press E to interact";
 				break;
 			case "Jump":
-				buttonPrompt.text = "Press B to jump";
+				buttonPrompt.text = "Press Space to jump";
 				break;
 			case "Sprint":
-				buttonPrompt.text = "Hold Right Trigger to sprint";
+				buttonPrompt.text = "Hold Shift to sprint";
 				break;
 			default:
 				buttonPrompt.text = "";

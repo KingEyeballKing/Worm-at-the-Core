@@ -38,13 +38,14 @@ public class WorldTile : MonoBehaviour {
 	}
 	public bool isFirstTile = false;
 	public bool isEpic = false;
-	public float powerCost = 0.1f;
+	public float powerCost = -2f;
 
 	private Transform _myTransform;
 	private Material _myMaterial;
 	// private Color _myColor;
 	private Vector3 _initialPosition = Vector3.zero;
 	private GameObject _timeOfDay;
+	private GameObject _player;
 
 	void Awake() {
 		Instance = this;
@@ -53,8 +54,9 @@ public class WorldTile : MonoBehaviour {
 		// _myColor = _myMaterial.color;
 		_initialPosition = _myTransform.position;
 		_timeOfDay = GameObject.FindWithTag("TimeOfDay");
+		_player = GameObject.FindWithTag("Player");
 
-		if (isEpic) { powerCost = 0f - powerCost; }
+		if (isEpic) { powerCost *= -1f; }
 
 		if (!isFirstTile) {
 			if (isEpic) { PlayIntroAnimation(5f); } 
@@ -66,11 +68,10 @@ public class WorldTile : MonoBehaviour {
 	}
 
 	void Start() {
-		// Subtract cost of this tile to player power. If it's EPIC, add to power instead.
+		// Subtract cost of this tile to player power.
 		if (!isFirstTile) {
-			var ToD = _timeOfDay.GetComponent<TimeOfDay>();
-			if (ToD.slider > powerCost || isEpic) {
-				ToD.slider += powerCost;
+			if (_player.GetComponent<ThePlayer>().currentPower > powerCost) {
+				_player.GetComponent<ThePlayer>().currentPower -= powerCost;
 			}
 		}
 		SoundControl.Instance.PlayNote();
