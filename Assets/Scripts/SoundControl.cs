@@ -12,12 +12,12 @@ public class SoundControl : MonoBehaviour {
 	}
 
 	void Start() {
-		audio.pitch = 1.25f;
+		GetComponent<AudioSource>().pitch = 1.25f;
 	}
 
 	public void PlayNote() {
 		// audio.clip = Note;
 		// audio.pitch = (float)UnityEngine.Random.Range(0.5f, 1.5f);
-		audio.PlayOneShot(Note, 1f);
+		GetComponent<AudioSource>().PlayOneShot(Note, 1f);
 	}
 }

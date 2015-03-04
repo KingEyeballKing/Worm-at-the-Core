@@ -106,7 +106,7 @@ public class InteractionVolume : MonoBehaviour {
 
 		_glyph.GetComponent<ParticleSystem>().Stop();
 		_glyphTransform.DOScale(_glyph.transform.localScale * 2f, duration * 2f);
-		_glyph.renderer.material.DOColor(Color.black, duration * 2f);
+		_glyph.GetComponent<Renderer>().material.DOColor(Color.black, duration * 2f);
 
 		yield return new WaitForSeconds(duration);
 		

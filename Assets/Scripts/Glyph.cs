@@ -9,7 +9,7 @@ public class Glyph : MonoBehaviour {
 	void Awake() {
 		if (glyphTextures.Count > 0) {
 			int i = UnityEngine.Random.Range(0, glyphTextures.Count);
-			gameObject.renderer.material.SetTexture("_Texture", glyphTextures[i]);
+			gameObject.GetComponent<Renderer>().material.SetTexture("_Texture", glyphTextures[i]);
 		} else {
 			Debug.LogError("Missing Glyph textures!");
 		}

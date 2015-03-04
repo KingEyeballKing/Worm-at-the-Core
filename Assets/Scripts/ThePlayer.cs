@@ -32,7 +32,7 @@ public class ThePlayer : MonoBehaviour {
 			_name = PlayerData.Instance.Name;
 
 		// _age = int.Parse((string)PlayerData.Instance.Age);
-		_collider = gameObject.GetComponent<CharacterController>().collider;
+		_collider = gameObject.GetComponent<CharacterController>().GetComponent<Collider>();
 		_transform = transform;
 
 		_maxSpeed = gameObject.GetComponent<PlayerMotor>().movement.maxSpeed;

@@ -56,7 +56,7 @@ function Update() {
 
 	//Uncheck IncludeWater if you are not interested in using this.
 	if (IncludeWater == true) {
-		Water.renderer.material.SetColor("_horizonColor", Color.Lerp (WaterNight, WaterDay, slider2 * 2 - 0.2));
+		Water.GetComponent.<Renderer>().material.SetColor("_horizonColor", Color.Lerp (WaterNight, WaterDay, slider2 * 2 - 0.2));
 	}
 
 	if (slider < 0.5) {
@@ -70,8 +70,8 @@ function Update() {
 
 	// Change Moon alpha based on time of day.
 	var targetAlpha : float = (Tod <= 4.5 && Tod >= 18) ? 1.0 : 0;
-	var curAlpha : float = Moon.renderer.material.GetFloat("_Alpha");
-	Moon.renderer.material.SetFloat("_Alpha", Mathf.Lerp(curAlpha, targetAlpha, Time.deltaTime * 0.2));
+	var curAlpha : float = Moon.GetComponent.<Renderer>().material.GetFloat("_Alpha");
+	Moon.GetComponent.<Renderer>().material.SetFloat("_Alpha", Mathf.Lerp(curAlpha, targetAlpha, Time.deltaTime * 0.2));
 
 	// SKYBOX
 	if (Tod < 4) {

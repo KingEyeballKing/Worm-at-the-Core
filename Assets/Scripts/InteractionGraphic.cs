@@ -7,6 +7,6 @@ public class InteractionGraphic : MonoBehaviour {
 
     void Update() {
         float offset = Time.time * scrollSpeed;
-        renderer.material.mainTextureOffset = new Vector2(offset, -offset);
+        GetComponent<Renderer>().material.mainTextureOffset = new Vector2(offset, -offset);
     }
 }
